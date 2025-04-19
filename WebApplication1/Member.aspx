@@ -7,9 +7,20 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div>
-            Member Page</div>
-    </form>
+    <section class="row" aria-labelledby="memberTitle">
+        <h1 id="memberTitle">Member Page</h1>
+    </section>
+
+    <div class="row">
+    <section class="col-md-4" aria-labelledby="weatherServiceTitle">
+        <h2 id="weatherServiceTitle">Weather Service</h2>
+        <p>
+            Click here to access Weather Service:       
+            <asp:Button ID="weatherServiceBtn" runat="server" Text="Weather Service" OnClick="weatherServiceBtn_Click" />
+        </p>
+        <p>
+            &nbsp;</p>
+    </section>
+</div>
 </body>
 </html>
