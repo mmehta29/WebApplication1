@@ -1,3 +1,4 @@
+// Page created by: Carissa Moore
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,68 +11,73 @@ using System.IO;
 
 namespace WebApplication1
 {
-    public partial class Login : System.Web.UI.Page
+        public partial class Login : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)  // if the user is already logged in, redirects them back to the Default page
             {
                 Response.Redirect("Default.aspx");
             }
 
-            if (!IsPostBack && Request.Cookies["UserLogin"] != null)
+            // if the user has just created their account, their username and password is automatically filled in
+            if (!IsPostBack && Request.Cookies["UserLogin"] != null)    
             {
                 usernameTb.Text = Request.Cookies["UserLogin"]["UserId"];
                 passwordTb.Text = Request.Cookies["UserLogin"]["Password"];
             }
         }
 
+        // login button
         protected void loginBtn_Click(object sender, EventArgs e)
         {
+            // getting entered information
             string username = usernameTb.Text;
             string password = passwordTb.Text;
 
-            bool result = CheckUser(username, password);
+            bool result = CheckUser(username, password);    // checking if the entered information is in Users.xml
 
-            if (!result)
+            if (!result)        // if the username and password isn't in Users.xml
             {
                 resultLbl.Text = "Invalid username or password";
             } else
             {
-                if (username == "TA" && password == "Cse445!")
+                if (username == "TA" && password == "Cse445!")  // if the User entered the Staff login
                 {
-                    FormsAuthentication.SetAuthCookie(username, false);
-                    Session["Staff"] = true;
+                    FormsAuthentication.SetAuthCookie(username, false);             // creates a cookie with their login information
+                    Session["Staff"] = true;                                        // sets the Session State of Staff to true
                     FormsAuthentication.RedirectFromLoginPage(username, false);
-                } else
+                } else        // if the User is a Member
                 {
-                    FormsAuthentication.SetAuthCookie(username, false);
-                    Session["Staff"] = false;
-                    Session["Member"] = true;
+                    FormsAuthentication.SetAuthCookie(username, false);         // creates a cookie with their login information
+                    Session["Staff"] = false;                                   // sets the Session State of Staff to false
+                    Session["Member"] = true;                                   // sets the Sesion State of Memeber to true
                     FormsAuthentication.RedirectFromLoginPage(username, false);
                 }
             }
         }
 
+        // method to check whether the entered username and password match for a verified account in Users.xml
         bool CheckUser(string username, string password)
         {
-            string path = Server.MapPath("~/App_Data/Users.xml");
-            if (!File.Exists(path))
+            string path = Server.MapPath("~/App_Data/Users.xml");   // path to Users.xml
+            if (!File.Exists(path))             // if the file doesn't exist, there are no users and nobody can login
             {
                 return false;
             }
 
             XmlDocument doc = new XmlDocument();
-            doc.Load(path);
+            doc.Load(path);                     // loading Users.xml to be read
 
             // check if hashed
 
-            XmlNode user = doc.SelectSingleNode($"/Users/User[Username='{username}' and Password='{password}']");
+            // checking if a node is returned with the given username and password combination
+            XmlNode user = doc.SelectSingleNode($"/Users/User[Username='{username}' and Password='{password}']"); 
             
-            if (user != null)
+            if (user != null)   // if the user exists, return true
             {
                 return true;
-            } else
+            } else               // if the user doesn't exist, return false
             {
                 return false;
             }
