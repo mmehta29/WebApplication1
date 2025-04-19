@@ -1,4 +1,5 @@
-﻿using System;
+// Page Created by: Carissa Moore (1224352909)
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
@@ -66,6 +67,11 @@ namespace WebApplication1
         protected void loginBtn_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login.aspx");
+        }
+
+        protected void weatherSvcButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WeatherService.aspx");
         }
     }
 }
