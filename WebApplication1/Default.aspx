@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <main>
+        <main>
         <section class="row" aria-labelledby="aspnetTitle">
             <h1 id="aspnetTitle">Group 127</h1>
             <p class="lead">TODO: introduce what functinality the application offers, how end users can sign up for the services, how the users (TA/grader) can test this application, and what are the test cases/inputs</p>
@@ -69,10 +69,30 @@
                             <td>Carissa Moore</td>
                             <td>WSDL service</td>
                             <td>Weather Service</td>
-                            <td>Zip</td>
-                            <td>String</td>
-                            <td>Access Weather for the given zip code</td>
-                            <td></td>
+                            <td>String/Int: Zip</td>
+                            <td>List of Strings</td>
+                            <td>Return a 5 day weather forecast for the entered zip code</td>
+                            <td>In &#39;Member&#39; Page or&nbsp;
+                                <asp:Button ID="weatherSvcButton" runat="server" Text="Click Here" OnClick="weatherSvcButton_Click" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Carissa Moore</td>
+                            <td>User Control</td>
+                            <td>Create Account and Login</td>
+                            <td>Two Strings: username and password</td>
+                            <td>Access to Member page</td>
+                            <td>Create an account and login in order to access the services</td>
+                            <td>Available by clicking the Login or Create Account button above</td>
+                        </tr>
+                        <tr>
+                            <td>Carissa Moore</td>
+                            <td>Cookies</td>
+                            <td>Logout</td>
+                            <td>Button click</td>
+                            <td>Removes access to Memeber/Staff pages</td>
+                            <td>Logs out the user so they are no longer able to access the services</td>
+                            <td>Available by clicking the Logout button below</td>
                         </tr>
                     </table>
 
