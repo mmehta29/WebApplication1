@@ -21,7 +21,7 @@ namespace WebApplication1
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                Response.Redirect("~/Member/Member.aspx");
+                Response.Redirect("/Member.aspx");
             }
             else
             {
@@ -39,7 +39,7 @@ namespace WebApplication1
                     result1Lbl.Text = "You do not have access to this page.";
                 } else
                 {
-                    Response.Redirect("~/Staff/Staff.aspx");
+                    Response.Redirect("/Staff.aspx");
                 }
             } else
             {
