@@ -1,3 +1,5 @@
+// Page created by: Carissa Moore (1224352909)
+// to be udpated for Assingment 6
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,8 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Staff"] == null || (bool)Session["Staff"] == false)
+            // if the user does not have Staff access, they are redirected back to the Default page
+            if (Session["Staff"] == null || (bool)Session["Staff"] == false) 
             {
                 Response.Redirect("~/Default.aspx");
             }
