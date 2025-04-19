@@ -18,43 +18,47 @@ namespace WebApplication1
         }
         
         // member button
+                // member button
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            if (HttpContext.Current.User.Identity.IsAuthenticated)  // if user is logged in, take them to the Member page
             {
                 Response.Redirect("/Member.aspx");
             }
             else
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("Login.aspx");        // if the user is not logged in, take them to the Login page
             }
         }
 
         // staff button
         protected void StaffBtn_Click(object sender, EventArgs e)
         {
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            if (HttpContext.Current.User.Identity.IsAuthenticated)   // if the user is logged in
             {
-                if (Session["Staff"] == null || (bool)Session["Staff"] == false)
+                if (Session["Staff"] == null || (bool)Session["Staff"] == false)   // if the user does not have access to the Staff page
                 {
                     result1Lbl.Text = "You do not have access to this page.";
-                } else
+                } else      // if the user is Staff, they are redirected to the Staff page
                 {
                     Response.Redirect("/Staff.aspx");
                 }
-            } else
+            } else          // if the user is not logged in, take them to the Login page
             {
                 Response.Redirect("Login.aspx");
             }
         }
 
+        // create account button
         protected void createAccBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CreateAccount.aspx");
+            Response.Redirect("CreateAccount.aspx");    // if the button is clicked, takes the user to the Create Account Page
         }
 
+        // logout button
         protected void logoutBtn_Click(object sender, EventArgs e)
         {
+            // if the logout button is clicked, all Session States and Cookies are reset/cleared
             Session.Clear();
             Session.Abandon();
 
@@ -64,13 +68,17 @@ namespace WebApplication1
             resultLbl.Text = "Successfully signed out!";
         }
 
+        // login button
         protected void loginBtn_Click(object sender, EventArgs e)
         {
+            // redirects the user to the Login page
             Response.Redirect("Login.aspx");
         }
 
+        // weather service button for the TryIt page
         protected void weatherSvcButton_Click(object sender, EventArgs e)
         {
+            // redirects the user to the Weather Forecast page
             Response.Redirect("WeatherService.aspx");
         }
     }
