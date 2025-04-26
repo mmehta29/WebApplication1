@@ -22,7 +22,7 @@ namespace WebApplication1
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)  // if user is logged in, take them to the Member page
             {
-                Response.Redirect("/Member.aspx");
+                Response.Redirect("Member.aspx");
             }
             else
             {
@@ -41,7 +41,7 @@ namespace WebApplication1
                 }
                 else      // if the user is Staff, they are redirected to the Staff page
                 {
-                    Response.Redirect("/Staff.aspx");
+                    Response.Redirect("Staff.aspx");
                 }
             }
             else          // if the user is not logged in, take them to the Login page
