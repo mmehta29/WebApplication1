@@ -2,10 +2,11 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-        <main>
+    <main>
         <section class="row" aria-labelledby="aspnetTitle">
             <h1 id="aspnetTitle">Group 127</h1>
-            <p class="lead">TODO: introduce what functinality the application offers, how end users can sign up for the services, how the users (TA/grader) can test this application, and what are the test cases/inputs</p>
+            <p class="lead">This application allows users to create an account and access weather forecast and encryption services. To get started, create an account below.
+                For access to Staff page, use Username: &#39;TA&#39; and Password: &#39;Cse445!&#39;</p>
         </section>
 
         <div class="row">
@@ -50,6 +51,7 @@
                     &nbsp;</p>
             </section>
         </div>
+        <br />
 
         <div class="row">
             <section class="col=md-4" aria-labelledby="serviceDirTitle">
@@ -94,95 +96,57 @@
                             <td>Logs out the user so they are no longer able to access the services</td>
                             <td>Available by clicking the Logout button below</td>
                         </tr>
+                        <tr>
+                            <td>Carissa Moore</td>
+                            <td>User control</td>
+                            <td>Image verifier captcha</td>
+                            <td>String: enteredCaptcha</td>
+                            <td>Verifies that the user correctly entered the captcha and allows them to create an account if correct</td>
+                            <td>Generates an image verifier and prompts the user to enter the string that it shows</td>
+                            <td>Located in the 'Create Account' Page</td>
+                        </tr>
+                        <tr>
+                            <td>Manya</td>
+                            <td>DLL Library</td>
+                            <td>ComputeSha256Hash</td>
+                            <td>string input</td>
+                            <td>string (hashed text)</td>
+                            <td>Hashes a string securely using SHA-256.</td>
+                            <td>
+                                <asp:Button ID="encryptionTryItBtn" runat="server" OnClick="encryptionTryItBtn_Click" Text="Click Here" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                           <td>Manya</td>
+                           <td>Web Service (WSDL)</td>
+                           <td>Encrypt</td>
+                           <td>string text, string key, string method</td>
+                           <td>string (encrypted text)</td>
+                           <td>Encrypts a string using AES encryption method.</td>
+                           <td>In &#39;Memeber&#39; Page</td>
+                        </tr>
+                        
                     </table>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-            <h1>Welcome to Assignment 5 Web Application</h1>
-
-                <hr />
-                <p>
-                    This web application demonstrates the integration of local components (hashing library, global event handler) 
-                    and remote web services (encryption/decryption service) into an ASP.NET Framework architecture. 
-                    You can test each component using the TryIt sections below.
                 </p>
-
-                <hr />
-
-               <h2>Navigation</h2>
-
-                <asp:Button ID="btnMemberPage" runat="server" Text="Go to Member Page" OnClick="btnMemberPage_Click" />
-                <br /><br />
-                <asp:Button ID="btnStaffPage" runat="server" Text="Go to Staff Page" OnClick="btnStaffPage_Click" />
-
-                <hr />
-
-
-                <hr />
-
-                <h2>TryIt - Hashing DLL</h2>
-
-                <asp:Label ID="lblHashInput" runat="server" Text="Enter Text to Hash:" />
-                <br />
-                <asp:TextBox ID="txtHashInput" runat="server" Width="300px"></asp:TextBox>
-                <br /><br />
-                <asp:Button ID="btnHashIt" runat="server" Text="Hash It!" OnClick="btnHashIt_Click" />
-                <br /><br />
-                <asp:Label ID="lblHashResult" runat="server" Text="" />
-
-
-                <h2>TryIt - Encryption Service</h2>
-
-                <asp:Label ID="lblEncryptInput" runat="server" Text="Enter Text to Encrypt:" />
-                <br /><br />
-                <asp:TextBox ID="txtEncryptInput" runat="server" Width="300px" />
-                <br /><br />
-                <asp:Button ID="btnEncrypt" runat="server" Text="Encrypt!" OnClick="btnEncrypt_Click" />
-                <br /><br />
-                <asp:Label ID="lblEncryptResult" runat="server" Text="" Font-Bold="True" ForeColor="Blue" />
-
-
-            <hr />
-            <h2>Service Directory</h2>
-
-            <table border="1" style="width:100%; text-align:center;">
-                <tr>
-                    <th>Provider Name</th>
-                    <th>Component Type</th>
-                    <th>Operation Name</th>
-                    <th>Parameters</th>
-                    <th>Return Type</th>
-                    <th>Description</th>
-                    <th>TryIt Button</th>
-                </tr>
-
-                <tr>
-                    <td>Manya</td>
-                    <td>DLL Library</td>
-                    <td>ComputeSha256Hash</td>
-                    <td>string input</td>
-                    <td>string (hashed text)</td>
-                    <td>Hashes a string securely using SHA-256.</td>
-                    <td><asp:Button ID="btnTryHash" runat="server" Text="Try Hash" OnClick="btnTryHash_Click" /></td>
-                </tr>
-
-                <tr>
-                    <td>Manya</td>
-                    <td>Web Service (WSDL)</td>
-                    <td>Encrypt</td>
-                    <td>string text, string key, string method</td>
-                    <td>string (encrypted text)</td>
-                    <td>Encrypts a string using AES encryption method.</td>
-                    <td><asp:Button ID="btnTryEncrypt" runat="server" Text="Try Encrypt" OnClick="btnTryEncrypt_Click" /></td>
-                </tr>
-            </table>
-
+            </section>
         </div>
-    </form>
-</body>
-</html>
+        <div class="row">
+    <section class="col-md-4" aria-labelledby="logoutTitle">
+        <h2 id="logoutTitle">&nbsp;</h2>
+        <h2>Logout</h2>
+        <p>
+            Click here to logout:   
+            <asp:Button ID="logoutBtn" runat="server" Text="Logout" OnClick="logoutBtn_Click" />
+            <br />
+            <asp:Label ID="resultLbl" runat="server"></asp:Label>
+        </p>
+        <p>
+            &nbsp;</p>
+    </section>
+</div>
+
+    </main>
+
+</asp:Content>
