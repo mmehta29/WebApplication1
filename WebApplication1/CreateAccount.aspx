@@ -24,6 +24,13 @@
         <div>
              <asp:Label ID="resultLbl" runat="server"></asp:Label>
         </div>
+        <h3>Image Verifier</h3>
+        <asp:Image ID="captchaImage" runat="server" />
+        <br />
+        Enter the string here:&nbsp;
+        <asp:TextBox ID="captchaTb" runat="server"></asp:TextBox>
+        <br />
+        <asp:Label ID="captchaResult" runat="server" ForeColor="Red"></asp:Label>
     </form>
 </body>
 </html>
