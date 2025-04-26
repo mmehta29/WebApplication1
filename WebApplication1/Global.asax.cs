@@ -1,4 +1,5 @@
-﻿using System;
+// Page created by: Manya Mehta (1223934660)
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,8 @@ namespace WebApplication1
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             System.Diagnostics.Debug.WriteLine("Application has started successfully at: " + DateTime.Now);
         }
 
