@@ -1,76 +1,92 @@
-// Page Created by: Carissa Moore (1224352909)
+// Page created by: Carissa Moore (1224352909)
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ClassLibrary1;
-using WebApplication1.ServiceReference1;
+
 namespace WebApplication1
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class _Default : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // string hashedValue = Class1.ComputeSha256Hash("MySecretPassword123");
-            // System.Diagnostics.Debug.WriteLine("Hashed Password: " + hashedValue);
+
         }
-        protected void btnHashIt_Click(object sender, EventArgs e)
+
+        // member button
+        protected void Button1_Click(object sender, EventArgs e)
         {
-            // Hash the user input text using DLL library
-            string input = txtHashInput.Text;
-            string hashedResult = Class1.ComputeSha256Hash(input);
-            lblHashResult.Text = "Hashed Output: " + hashedResult;
+            if (HttpContext.Current.User.Identity.IsAuthenticated)  // if user is logged in, take them to the Member page
+            {
+                Response.Redirect("/Member.aspx");
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");        // if the user is not logged in, take them to the Login page
+            }
         }
 
-        protected void btnEncrypt_Click(object sender, EventArgs e)
+        // staff button
+        protected void StaffBtn_Click(object sender, EventArgs e)
         {
-            // Encrypt user input text using Encryption Web Service from my assignment 3
-            Service1Client client = new Service1Client();  
-            string inputText = txtEncryptInput.Text;
-            string key = "yourEncryptionKey";
-            string method = "AES";
-            string encrypted = client.Encrypt(inputText, key, method);
-
-            lblEncryptResult.Text = "Encrypted Output: " + encrypted;
-
-            client.Close();
+            if (HttpContext.Current.User.Identity.IsAuthenticated)   // if the user is logged in
+            {
+                if (Session["Staff"] == null || (bool)Session["Staff"] == false)   // if the user does not have access to the Staff page
+                {
+                    result1Lbl.Text = "You do not have access to this page.";
+                }
+                else      // if the user is Staff, they are redirected to the Staff page
+                {
+                    Response.Redirect("/Staff.aspx");
+                }
+            }
+            else          // if the user is not logged in, take them to the Login page
+            {
+                Response.Redirect("Login.aspx");
+            }
         }
 
-        protected void btnMemberPage_Click(object sender, EventArgs e)
+        // create account button
+        protected void createAccBtn_Click(object sender, EventArgs e)
         {
-            // Redirect to Member Page (we will be implemented in Assignment 6)
-            Response.Redirect("Member.aspx");
+            Response.Redirect("CreateAccount.aspx");    // if the button is clicked, takes the user to the Create Account Page
         }
 
-        protected void btnStaffPage_Click(object sender, EventArgs e)
+        // logout button
+        protected void logoutBtn_Click(object sender, EventArgs e)
         {
-            // Redirect to Staff Page (we will be implemented in Assignment 6)
-            Response.Redirect("Staff.aspx");
+            // if the logout button is clicked, all Session States and Cookies are reset/cleared
+            Session.Clear();
+            Session.Abandon();
+
+            Response.Cookies.Clear();
+
+            FormsAuthentication.SignOut();
+            resultLbl.Text = "Successfully signed out!";
         }
-        protected void btnTryHash_Click(object sender, EventArgs e)
+
+        // login button
+        protected void loginBtn_Click(object sender, EventArgs e)
         {
-            // TryIt: Hash a sample test string automatically
-            string testInput = "TestHash123";
-            string hashedResult = Class1.ComputeSha256Hash(testInput);
-            lblHashResult.Text = "Hashed Output: " + hashedResult;
+            // redirects the user to the Login page
+            Response.Redirect("Login.aspx");
         }
 
-        protected void btnTryEncrypt_Click(object sender, EventArgs e)
+        // weather service button for the TryIt page
+        protected void weatherSvcButton_Click(object sender, EventArgs e)
         {
-            // TryIt: Encrypt a sample test string automatically
-            ServiceReference1.Service1Client client = new ServiceReference1.Service1Client();
-            string testInput = "EncryptThis123";
-            string key = "key123"; 
-            string method = "AES";
-            string encryptedResult = client.Encrypt(testInput, key, method);
-            lblEncryptResult.Text = "Encrypted Output: " + encryptedResult;
-            client.Close();
+            // redirects the user to the Weather Forecast page
+            Response.Redirect("WeatherService.aspx");
         }
 
-
-
+        // hash service button for the TryIt page
+        protected void encryptionTryItBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("HashService.aspx");
+        }
     }
 }
